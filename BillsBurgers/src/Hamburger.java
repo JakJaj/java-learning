@@ -22,18 +22,22 @@ public class Hamburger {
     public void addHamburgerAddition1(String additionName, double additionPrice){
         addition1Name = additionName;
         addition1Price = additionPrice;
+        System.out.println("Added " + additionName + " for " + additionPrice + "$.");
     }
     public void addHamburgerAddition2(String additionName, double additionPrice){
         addition2Name = additionName;
         addition2Price = additionPrice;
+        System.out.println("Added " + additionName + " for " + additionPrice + "$.");
     }
     public void addHamburgerAddition3(String additionName, double additionPrice){
         addition3Name = additionName;
         addition3Price = additionPrice;
+        System.out.println("Added " + additionName + " for " + additionPrice + "$.");
     }
     public void addHamburgerAddition4(String additionName, double additionPrice){
         addition4Name = additionName;
         addition4Price = additionPrice;
+        System.out.println("Added " + additionName + " for " + additionPrice + "$.");
     }
     public double itemizedHamburger(){
         return price + addition1Price + addition2Price + addition3Price + addition4Price;
