@@ -1,7 +1,7 @@
 public class Hamburger {
     private String name;
     private String meat;
-    private int price;
+    private double price;
     private String breadRollType;
     private  String addition1Name;
     private double addition1Price;
