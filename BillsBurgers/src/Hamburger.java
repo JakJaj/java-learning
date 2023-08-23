@@ -12,7 +12,7 @@ public class Hamburger {
     private  String addition4Name;
     private  double addition4Price;
 
-    public Hamburger(String name, String meat, int price, String breadRollType) {
+    public Hamburger(String name, String meat, double price, String breadRollType) {
         this.name = name;
         this.meat = meat;
         this.price = price;
