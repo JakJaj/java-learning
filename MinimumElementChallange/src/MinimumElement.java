@@ -16,5 +16,13 @@ public class MinimumElement {
         }
         return array;
     }
-    
+    public static int findMin(int[] array){
+        int min = array[0];
+        for(int element : array){
+            if(element < min){
+                min = element;
+            }
+        }
+        return min;
+    }
 }
