@@ -11,8 +11,10 @@ public class MobilePhone {
 
     public boolean addNewContact(Contact contact){
         if (myContacts.contains(contact)) return false;
-        myContacts.add(contact);
-        return true;
+        else {
+            myContacts.add(contact);
+            return true;
+        }
     }
     public boolean updateContact(Contact oldContact, Contact newContact){
         if (myContacts.contains(oldContact)){
