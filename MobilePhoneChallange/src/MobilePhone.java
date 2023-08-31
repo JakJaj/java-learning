@@ -49,5 +49,10 @@ public class MobilePhone {
         }
         return null;
     }
-    
+    public void printContacts(){
+        System.out.println("COntact List:");
+        for(Contact element: myContacts){
+            System.out.println(element.name + " -> " + element.phoneNumber);
+        }
+    }
 }
