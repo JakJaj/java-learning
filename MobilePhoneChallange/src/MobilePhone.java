@@ -45,14 +45,14 @@ public class MobilePhone {
 
     public Contact queryContact(String contact){
         for(Contact element: myContacts){
-            if(element.name = contact) return  element;
+            if(element.getName() = contact) return  element;
         }
         return null;
     }
     public void printContacts(){
         System.out.println("COntact List:");
         for(Contact element: myContacts){
-            System.out.println(element.name + " -> " + element.phoneNumber);
+            System.out.println(element.getName() + " -> " + element.getPhoneNumber());
         }
     }
 }
