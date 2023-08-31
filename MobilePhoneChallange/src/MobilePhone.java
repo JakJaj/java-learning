@@ -36,21 +36,20 @@ public class MobilePhone {
         return -1;
     }
     private int findContact(String contact){
-        if(myContacts.contains(contact)){
-            int idx = myContacts.indexOf(contact);
-            return idx;
+        for(Contact element: myContacts){
+            if(element.getName().contentEquals(contact)) return myContacts.indexOf(element);
         }
         return -1;
     }
 
     public Contact queryContact(String contact){
         for(Contact element: myContacts){
-            if(element.getName() = contact) return  element;
+            if(element.getName().contentEquals(contact)) return  element;
         }
         return null;
     }
     public void printContacts(){
-        System.out.println("COntact List:");
+        System.out.println("Contact List:");
         for(Contact element: myContacts){
             System.out.println(element.getName() + " -> " + element.getPhoneNumber());
         }
