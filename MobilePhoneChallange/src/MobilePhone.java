@@ -42,5 +42,12 @@ public class MobilePhone {
         }
         return -1;
     }
+
+    public Contact queryContact(String contact){
+        for(Contact element: myContacts){
+            if(element.name = contact) return  element;
+        }
+        return null;
+    }
     
 }
