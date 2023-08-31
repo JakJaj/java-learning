@@ -2,10 +2,11 @@ import java.util.ArrayList;
 
 public class MobilePhone {
     private String myNumber;
-    private ArrayList <Contact> myContacts= new ArrayList<>();
+    private ArrayList <Contact> myContacts;
 
     public MobilePhone(String phoneNumber){
         myNumber = phoneNumber;
+        myContacts = new ArrayList<>();
     }
 
     public boolean addNewContact(Contact contact){
