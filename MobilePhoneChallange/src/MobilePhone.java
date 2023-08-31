@@ -13,5 +13,13 @@ public class MobilePhone {
         myContacts.add(contact);
         return true;
     }
+    public boolean updateContact(Contact oldContact, Contact newContact){
+        if (myContacts.contains(oldContact)){
+            int idx = myContacts.indexOf(oldContact);
+            myContacts.set(idx,newContact);
+            return true;
+        }
+        return false;
+    }
     
 }
