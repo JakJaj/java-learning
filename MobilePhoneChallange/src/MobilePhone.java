@@ -8,4 +8,10 @@ public class MobilePhone {
         myNumber = phoneNumber;
     }
 
+    public boolean addNewContact(Contact contact){
+        if (myContacts.contains(contact)) return false;
+        myContacts.add(contact);
+        return true;
+    }
+    
 }
