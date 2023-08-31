@@ -10,7 +10,7 @@ public class MobilePhone {
     }
 
     public boolean addNewContact(Contact contact){
-        if (myContacts.contains(contact)) return false;
+        if (findContact(contact) > -1 && myContacts.get(findContact(contact)).getName().equals(contact.getName())) return false;
         else {
             myContacts.add(contact);
             return true;
@@ -40,14 +40,14 @@ public class MobilePhone {
     }
     private int findContact(String contact){
         for(Contact element: myContacts){
-            if(element.getName().contentEquals(contact)) return myContacts.indexOf(element);
+            if(element.getName().equals(contact)) return myContacts.indexOf(element);
         }
         return -1;
     }
 
     public Contact queryContact(String contact){
         for(Contact element: myContacts){
-            if(element.getName().contentEquals(contact)) return  element;
+            if(element.getName().equals(contact)) return  element;
         }
         return null;
     }
