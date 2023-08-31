@@ -21,5 +21,12 @@ public class MobilePhone {
         }
         return false;
     }
+    public boolean removeContact(Contact contact){
+        if(myContacts.contains(contact)){
+            myContacts.remove(contact);
+            return true;
+        }
+        return false;
+    }
     
 }
