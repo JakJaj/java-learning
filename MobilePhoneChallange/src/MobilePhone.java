@@ -28,5 +28,19 @@ public class MobilePhone {
         }
         return false;
     }
+    private int findContact(Contact contact){
+        if(myContacts.contains(contact)){
+            int idx = myContacts.indexOf(contact);
+            return idx;
+        }
+        return -1;
+    }
+    private int findContact(String contact){
+        if(myContacts.contains(contact)){
+            int idx = myContacts.indexOf(contact);
+            return idx;
+        }
+        return -1;
+    }
     
 }
