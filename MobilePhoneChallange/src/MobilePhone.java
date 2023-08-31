@@ -54,7 +54,7 @@ public class MobilePhone {
     public void printContacts(){
         System.out.println("Contact List:");
         for(Contact element: myContacts){
-            System.out.println(element.getName() + " -> " + element.getPhoneNumber());
+            System.out.println(myContacts.indexOf(element) + 1 + ". " +element.getName() + " -> " + element.getPhoneNumber());
         }
     }
 }
