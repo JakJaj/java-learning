@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Branch {
-    private final String name;
-    private final ArrayList<Customer> customers;
+    private  String name;
+    private  ArrayList<Customer> customers;
 
     public Branch(String name) {
         this.name = name;
@@ -17,7 +17,7 @@ public class Branch {
         return customers;
     }
 
-    public Customer findCustomer(String customerName){
+    private Customer findCustomer(String customerName){
         for(Customer element: customers){
             if(element.getName().equals(customerName)) return element;
         }
