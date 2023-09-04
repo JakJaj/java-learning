@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 
 public class Bank {
-    private final String name;
-    private final ArrayList<Branch> branches;
+    private  String name;
+    private  ArrayList<Branch> branches;
 
     public Bank(String name) {
         this.name = name;
         branches = new ArrayList<>();
     }
 
-    public Branch findBranch(String name){
+    private Branch findBranch(String name){
         for(var branch: branches){
             if(branch.getName().equals(name)){
                 return branch;
@@ -29,27 +29,44 @@ public class Bank {
         if(foundBranch == null){
             return false;
         }
-        if(foundBranch.findCustomer(customerName) == null){
-            foundBranch.newCustomer(customerName,initialTransaction);
+
+        for(Customer customer: foundBranch.getCustomers()) {
+            if (customer.getName().equals(customerName)){
+                return false;
+            }
         }
-        return false;
+        foundBranch.newCustomer(customerName, initialTransaction);
+        return true;
     }
 
     public boolean addCustomerTransaction(String branchName, String customerName,double transaction){
         Branch foundBranch = findBranch(branchName);
         if(foundBranch == null) return false;
-        Customer foundCustomer = foundBranch.findCustomer(customerName);
-        if(foundCustomer == null) return false;
-        foundCustomer.addTransaction(transaction);
-        return true;
+
+        for(Customer customer: foundBranch.getCustomers()){
+            if(customer.getName().equals(customerName)){
+                customer.addTransaction(transaction);
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean listCustomers(String branchName, boolean printTransaction){
         Branch foundBranch = findBranch(branchName);
         if(foundBranch == null) return false;
-
+        System.out.println("Customer details for branch " + foundBranch.getName());
         for(Customer customer: foundBranch.getCustomers()){
-            System.out.println(customer.getName()  + (printTransaction ? ": " + customer.getTransactions(): ""));
+            if(printTransaction){
+                System.out.println("Customer: " + customer.getName() + "[" + (foundBranch.getCustomers().indexOf(customer) + 1) + "]");
+                System.out.println("Transactions");
+                for(int i = 0; i < customer.getTransactions().size(); i++){
+                    System.out.println("[" + (i + 1)+ "]  Amount " + customer.getTransactions().get(i));
+
+                }
+            }else {
+                System.out.println("Customer: " + customer.getName() + "[" + (foundBranch.getCustomers().indexOf(customer) + 1) + "]");
+            }
         }
         return true;
     }
