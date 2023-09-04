@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Customer {
     private final String name;
@@ -6,8 +7,7 @@ public class Customer {
 
     public Customer(String name, double initialTransaction) {
         this.name = name;
-        transactions = new ArrayList<>();
-        transactions.add(initialTransaction);
+        transactions = new ArrayList<>(List.of(initialTransaction));
     }
 
     public String getName() {
