@@ -6,10 +6,12 @@ public abstract class ListItem {
         this.value = value;
     }
     abstract ListItem next();
-    abstract ListItem setNext();
+
+    abstract ListItem setNext(ListItem item);
+
     abstract ListItem previous();
-    abstract ListItem setPrevious();
-    abstract int compareTo();
+    abstract ListItem setPrevious(ListItem item);
+    abstract int compareTo(ListItem item);
     public Object getValue(){
         return value;
     }
