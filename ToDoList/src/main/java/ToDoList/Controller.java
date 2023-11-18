@@ -1,19 +1,22 @@
 package ToDoList;
 
+import ToDoList.DataModels.ToDoData;
 import ToDoList.DataModels.ToDoItem;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextArea;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 
 public class Controller {
     private List<ToDoItem> toDoItems;
@@ -23,18 +26,9 @@ public class Controller {
     private TextArea textArea;
     @FXML
     private Label deadLine;
+    @FXML
+    private BorderPane mainBorderPane;
     public void initialize(){
-        ToDoItem item1 = new ToDoItem("Wash car","Go and wash your car cause it is getting really dirty", LocalDate.of(2023, Month.NOVEMBER,10));
-        ToDoItem item2 = new ToDoItem("Learn Spring","Improve your knowledge of Spring framework", LocalDate.of(2024, Month.MARCH,19));
-        ToDoItem item3 = new ToDoItem("Do Java Homework","Do latest homework for Java class", LocalDate.of(2023, Month.NOVEMBER,23));
-        ToDoItem item4 = new ToDoItem("Get Diamond in Lol","Rank up to the Diamond by the end of the season", LocalDate.of(2023, Month.DECEMBER,20));
-        ToDoItem item5 = new ToDoItem("Pain a picture","Make something artsy and paint a nice picture", LocalDate.of(2023, Month.DECEMBER,29));
-        toDoItems = new ArrayList<ToDoItem>();
-        toDoItems.add(item1);
-        toDoItems.add(item2);
-        toDoItems.add(item3);
-        toDoItems.add(item4);
-        toDoItems.add(item5);
         todolistview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object object, Object t1) {
@@ -46,9 +40,56 @@ public class Controller {
                 }
             }
         });
-        todolistview.getItems().setAll(toDoItems);
+        todolistview.setItems(ToDoData.getInstance().getToDoItems());
         todolistview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         todolistview.getSelectionModel().selectFirst();
+        todolistview.setCellFactory(new Callback<ListView<ToDoItem>, ListCell<ToDoItem>>() {
+            @Override
+            public ListCell<ToDoItem> call(ListView param) {
+                ListCell<ToDoItem> cell = new ListCell<ToDoItem>() {
+                    @Override
+                    protected void updateItem(ToDoItem item, boolean b) {
+                        super.updateItem(item, b);
+                        if(b){
+                            setText(null);
+                        }else{
+                            setText(item.getShortDescription());
+                            if(item.getDeadLine().isBefore(LocalDate.now().plusDays(1))){
+                                setTextFill(Color.RED);
+                            }else if(item.getDeadLine().equals(LocalDate.now().plusDays(1))){
+                                setTextFill(Color.PURPLE);
+                            }
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+    }
+    @FXML
+    public void showNewItemDialog(){
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainBorderPane.getScene().getWindow());
+        dialog.setTitle("Create New Todo Task");
+        dialog.setHeaderText("Use this dialog to create new task");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("ToDoItemDialog.fxml"));
+        try{
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK){
+            DialogController controller = fxmlLoader.getController();
+            ToDoItem item = controller.procesResult();
+            todolistview.getSelectionModel().select(item);
+
+        }
 
     }
 }
