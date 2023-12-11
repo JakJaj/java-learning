@@ -16,7 +16,6 @@
                     </items>
                 </Menu>
             </MenuBar>
-
             <ToolBar>
                 <HBox>
                     <Button text="New..." onAction="#showNewItemDialog">
